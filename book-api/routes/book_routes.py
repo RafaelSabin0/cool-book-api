@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, Blueprint, request
+from flask import jsonify, Blueprint, request
 from dotenv import load_dotenv
 import mysql.connector
 import os
