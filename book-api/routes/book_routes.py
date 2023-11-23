@@ -62,12 +62,12 @@ def add_book():
         db.commit()
 
         response_data = {
+            '✅ Success ✅': 'New Book Added!',
             'Book Info':{
             'title': title,
             'author': author,
             'price': price
-            },
-            '✅ Success ✅': 'Book Added'
+            }
         }
 
         return jsonify(response_data)
@@ -87,25 +87,25 @@ def update_book():
     price = request_data.get('price')
 
     if not request_data:
-        return jsonify({'🚨 Oops 🚨': 'Check if the request boy is valid and try again'}), 400
+        return jsonify({'🚨 Oops 🚨': 'Check if the request body is valid and try again'}), 400
     
     if not book_id or not title or not author or not price:
-            return jsonify({'🚨 Oops 🚨': 'Check if all informations are present'}), 400
+            return jsonify({'🚨 Oops 🚨': 'Check that all fields are included in the request and try again!'}), 400
     if len(title) <0 or len(author) <0 or len(price) <0:
-            return jsonify({'🚨 Oops 🚨': 'Check if all some values are less than 0'}), 400
+            return jsonify({'🚨 Oops 🚨': 'Check that all fields are filled in correctly and try again!'}), 400
         
     try:
         cursor.execute(f'UPDATE `books` SET `title` = "{title}", `author` = "{author}", `price` = "{price}" WHERE `books`.`id` = {book_id};')
         db.commit()
 
         response_data = {
+            '✅ Success ✅': 'Book Updated!',
             'Book':{
             '_id': book_id,
             'title': title,
             'author': author,
             'price': price
-            },
-            '✅ Success ✅': 'Book Updated!'
+            }
         }
 
         return jsonify(response_data) 
@@ -120,13 +120,13 @@ def update_book_price():
 
      try:
         if not request_data:
-             return jsonify({'🚨 Oops 🚨': 'The requested information cant be empty'})
+             return jsonify({'🚨 Oops 🚨': "The requested information can't be empty"})
      
         book_id = request_data.get('id')
         price = request_data.get('price')
 
         if not book_id:
-             return jsonify({'🚨 Oops 🚨': 'You must inform the ID of the book!'})
+             return jsonify({'🚨 Oops 🚨': "It's necessary to inform the book ID!"})
 
         cursor.execute(f'UPDATE `books` SET `price` = "{price}" WHERE `books`.`id` = {book_id};')
         db.commit()
@@ -137,7 +137,7 @@ def update_book_price():
         book_info = [dict(zip(columns, row)) for row in cursor.fetchall()]
         db.commit()
 
-        return jsonify({'✅ Price updated successfuly! ✅': book_info})
+        return jsonify({'✅ Price Updated Successfully! ✅': book_info})
     
      except Exception as e:
         print("🚨 Error 🚨: ", e)
@@ -148,7 +148,7 @@ def update_book_price():
 def delete_book_by_id(id):
     try:
         if not id:
-            return jsonify({'🚨 Oops 🚨': 'You must inform the book ID'})
+            return jsonify({'🚨 Oops 🚨': "It's necessary to inform the book ID"})
         
         #Getting the book info to show the information deleted in the end
         cursor.execute(f"Select * From `books` where id = {id}")
