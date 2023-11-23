@@ -1,5 +1,3 @@
 Flask
-pymongo[srv]
-Flask-pymongo
 mysql-connector-python
 python-dotenv

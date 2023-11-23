@@ -35,11 +35,16 @@ def get_book():
 
 @book_routes.route('/book/<int:id>', methods=['GET'])
 def get_book_by_id(id):
-    cursor.execute(f"Select * From books where id = {id}")
-    columns = [col[0] for col in cursor.description]
-    book = [dict(zip(columns, row)) for row in cursor.fetchall()]
-    db.commit()
-    return jsonify(book)
+    try:
+        cursor.execute(f"Select * From books where id = {id}")
+        columns = [col[0] for col in cursor.description]
+        book = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        db.commit()
+        return jsonify(book)
+    
+    except Exception as e:
+       print("🚨 Error 🚨: ", e)
+       return jsonify({'🚨 Oops 🚨': 'Internal Server Error',}), 500 
 
 @book_routes.route('/book/create', methods=['POST'])
 def add_book():
