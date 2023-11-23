@@ -12,7 +12,13 @@ Study project made in Python using Flask that stores food information in a MySQL
 
 ## How to Run
 
-Run the app.py file to start the server
+- In the **book-api** folder install the libraries with : ```pip install -r requirements.txt```
+
+- I also left a script to create a database located inside the ```/db``` folder in case you want to test the API with some initial sample data
+
+- Set the connection data in the ***example.env*** file inside the **book-api** directory and rename the file to **.env**
+
+- Run the app.py file to start the server
 
 
 ## Technologies used in this project:
