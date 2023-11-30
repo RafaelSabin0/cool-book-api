@@ -8,7 +8,7 @@
 
 ## About the API
 
-Study project made in Python using Flask that stores food information in a MySQL Database
+Study project made in Python using Flask that stores food information in a MySQL Database.
 
 ## How to Run
 
